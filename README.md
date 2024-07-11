@@ -1,7 +1,7 @@
 # Trading Level Book
 This package will provide tools to create and manage a trading level book.
 
-With this you can manage an Order book for example, or a liquidations levels book or the three at the same time.
+With this you can manage an Order book for example, or a liquidations levels book or the two at the same time.
 
 Example :
 ```Python
