@@ -5,6 +5,8 @@ With this you can manage an Order book for example, or a liquidations levels boo
 
 Example :
 ```Python
+from trading_levelbook import Book
+
 book = Book(columns = 3) # 3 columns for bids, asks and liquidations
 
 bids = [
