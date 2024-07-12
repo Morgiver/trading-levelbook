@@ -11,7 +11,7 @@ class Book:
         # TODO
         pass
 
-    def round_down(x):
+    def round_down(self, x: float):
         """ Rounding down the value respecting the level granularity """
         return math.floor(x * self.granularity) / self.granularity
 
