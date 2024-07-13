@@ -1,7 +1,7 @@
 import math
 
 class Book:
-    def __init__(self, columns: int = 2, granularity: int = 2):
+    def __init__(self, columns: int = 2, granularity: int = 0):
          self.levels      = {}
          self.columns     = columns
          self.granularity = granularity
@@ -13,6 +13,9 @@ class Book:
 
     def round_down(self, x: float):
         """ Rounding down the value respecting the level granularity """
+        if self.granularity == 0:
+            return x
+
         return math.floor(x * self.granularity) / self.granularity
 
     def add_level(self, price: float, column: int, volume: float):
@@ -22,7 +25,7 @@ class Book:
         volume_levels[column] = volume
 
         # Add the new level
-        self.levels[self.round_down(price)] = volume_level
+        self.levels[self.round_down(price)] = volume_levels
 
         # Rearrange the dict in ascending order
         self.levels = dict(sorted(self.levels.items()))
@@ -40,10 +43,10 @@ class Book:
 
     def feed(self, *args):
         """ Feeding the levels, every arguments have to be a list that contain a list containing level and volume. e.g. [[level, volume], ...]"""
+        id_column = 0
+
         for column in args:
             """ Here we browse all columns feeding datas """
-            id_column = 0
-
             for level in column:
                 """ Here we browse all given levels and update them """
                 price = float(level[0])
@@ -56,7 +59,7 @@ class Book:
                     # If level is not in prices dict
                     self.add_level(price, id_column, volume)
 
-            id_column += 1
+            id_column = id_column + 1
 
         return self
 
